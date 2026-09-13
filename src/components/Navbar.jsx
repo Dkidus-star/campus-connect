@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
   const navLinkClass = ({ isActive }) =>
@@ -7,7 +8,12 @@ export default function Navbar() {
       : "text-gray-400 hover:text-black transition-colors duration-300";
 
   return (
-    <div className="flex justify-center pt-6 px-4 w-full z-50 absolute top-0">
+    <motion.div
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 90, damping: 20, delay: 0.2 }}
+      className="flex justify-center pt-6 px-4 w-full z-50 absolute top-0"
+    >
       <nav className="bg-white/80 backdrop-blur-md px-8 py-4 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 w-full max-w-5xl flex justify-between items-center">
         <Link
           to="/"
@@ -46,6 +52,6 @@ export default function Navbar() {
           About Us
         </Link>
       </nav>
-    </div>
+    </motion.div>
   );
 }
