@@ -16,20 +16,18 @@ export default function App() {
     <div className="flex flex-col min-h-screen bg-white font-sans selection:bg-black selection:text-white">
       <Navbar />
 
-      {/* Removed top padding to allow full-screen hero sections */}
-      <main className="flex-grow w-full px-4">
-        <div className="max-w-6xl mx-auto">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/clubs" element={<Clubs />} />
-            <Route path="/clubs/:id" element={<ClubDetails />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/events/:id" element={<EventDetails />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/about" element={<About />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
+      {/* We removed the max-w and px-4 here so Home can go full screen */}
+      <main className="flex-grow w-full">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/clubs" element={<Clubs />} />
+          <Route path="/clubs/:id" element={<ClubDetails />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/events/:id" element={<EventDetails />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
 
       <Footer />

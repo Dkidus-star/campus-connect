@@ -26,7 +26,7 @@ export default function Events() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="pt-32 pb-20"
+      className="pt-32 pb-20 max-w-6xl mx-auto px-4"
     >
       <div className="flex flex-col items-center mb-16 text-center">
         <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-black mb-6 uppercase">
