@@ -1,43 +1,53 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { FavoritesContext } from "../context/FavoritesContext";
 
 export default function ClubCard({ id, name, description, category }) {
-  // Access global state
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
-
-  // Check if this specific club is in the favorites array
   const isFavorite = favorites.includes(id);
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition overflow-hidden flex flex-col relative">
-      {/* Favorite Button (Star) */}
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: { type: "spring", stiffness: 100 },
+        },
+      }}
+      whileHover={{ y: -8 }}
+      className="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col relative group transition-all"
+    >
       <button
         onClick={() => toggleFavorite(id)}
-        className="absolute top-3 right-3 z-10 p-2 bg-white rounded-full shadow hover:bg-gray-50 transition"
+        className="absolute top-6 right-6 z-10 p-3 bg-gray-50 group-hover:bg-white rounded-full shadow-sm hover:scale-110 transition-all text-xl"
         title="Toggle Favorite"
       >
         {isFavorite ? "⭐" : "☆"}
       </button>
 
-      <div className="h-40 bg-gray-200 flex items-center justify-center text-gray-500">
-        Image: {name}
+      <div className="h-48 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 font-medium mb-6">
+        {name} Image
       </div>
-      <div className="p-5 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="text-xl font-bold text-gray-800 pr-8">{name}</h3>
-          <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">
-            {category}
-          </span>
-        </div>
-        <p className="text-gray-600 text-sm mb-4 flex-grow">{description}</p>
+
+      <div className="flex flex-col flex-grow">
+        <span className="text-xs uppercase tracking-widest font-bold text-gray-400 mb-2 block">
+          {category}
+        </span>
+        <h3 className="text-2xl font-black tracking-tight text-black mb-3 pr-8">
+          {name}
+        </h3>
+        <p className="text-gray-500 font-light mb-8 flex-grow">{description}</p>
+
         <Link
           to={`/clubs/${id}`}
-          className="text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition"
+          className="inline-flex justify-center items-center bg-black text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors"
         >
           View Details
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }

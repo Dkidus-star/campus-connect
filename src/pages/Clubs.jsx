@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import ClubCard from "../components/ClubCard";
 
 export default function Clubs() {
@@ -8,13 +9,10 @@ export default function Clubs() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Simulating an API call with a 1.5-second delay
     const fetchClubs = async () => {
       try {
         setIsLoading(true);
-
-        // Simulated network request delay
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulated delay
 
         const mockData = [
           {
@@ -49,48 +47,63 @@ export default function Clubs() {
         setClubs(mockData);
         setError(null);
       } catch (err) {
-        setError("Failed to load clubs. Please try again later.");
+        setError("Failed to load clubs.");
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchClubs();
-  }, []); // Empty dependency array means this runs once on component mount
+  }, []);
 
   const filteredClubs = clubs.filter((club) =>
     club.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Campus Clubs</h1>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="pt-32 pb-20"
+    >
+      <div className="flex flex-col items-center mb-16 text-center">
+        <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-black mb-6 uppercase">
+          Explore <span className="text-gray-200">Clubs</span>
+        </h1>
 
-      <div className="mb-8">
-        <input
-          type="text"
-          placeholder="Search clubs by name..."
-          className="w-full md:w-1/2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+        {/* Styled Pill Search Bar */}
+        <div className="relative w-full max-w-xl px-4">
+          <input
+            type="text"
+            placeholder="Search clubs by name..."
+            className="w-full p-5 pl-8 pr-12 text-lg bg-white border border-gray-100 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] focus:outline-none focus:ring-2 focus:ring-black transition-all font-light"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
       </div>
 
-      {/* Conditional Rendering based on state */}
       {isLoading && (
         <div className="flex justify-center items-center h-40">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
         </div>
       )}
 
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-          {error}
-        </div>
+        <div className="text-center text-red-500 font-medium">{error}</div>
       )}
 
       {!isLoading && !error && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4"
+        >
           {filteredClubs.length > 0 ? (
             filteredClubs.map((club) => (
               <ClubCard
@@ -102,12 +115,12 @@ export default function Clubs() {
               />
             ))
           ) : (
-            <p className="text-gray-500 col-span-full">
-              No clubs found matching your search.
+            <p className="text-gray-400 font-light text-xl col-span-full text-center">
+              No clubs found.
             </p>
           )}
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
