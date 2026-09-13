@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-// Extended dummy data with meeting details
 const DUMMY_CLUBS = [
   {
     id: "1",
@@ -47,67 +47,75 @@ const DUMMY_CLUBS = [
 ];
 
 export default function ClubDetails() {
-  const { id } = useParams(); // Extracts the 'id' from the URL
+  const { id } = useParams();
   const [club, setClub] = useState(null);
 
   useEffect(() => {
-    // Simulate finding the specific club in a database
     const foundClub = DUMMY_CLUBS.find((c) => c.id === id);
     setClub(foundClub);
   }, [id]);
 
   if (!club) {
     return (
-      <div className="text-center py-20 text-gray-500">
-        Loading club details...
+      <div className="pt-40 pb-20 flex justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="pt-32 pb-20 max-w-4xl mx-auto px-4"
+    >
       <Link
         to="/clubs"
-        className="text-blue-600 hover:underline mb-6 inline-block"
+        className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors mb-8"
       >
         &larr; Back to Clubs
       </Link>
-      <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-100">
-        <div className="h-64 bg-gray-200 flex items-center justify-center text-gray-500 text-xl">
+
+      <div className="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl overflow-hidden border border-gray-100">
+        <div className="h-80 bg-gray-50 flex items-center justify-center text-gray-300 text-2xl font-black uppercase tracking-widest">
           {club.name} Image
         </div>
-        <div className="p-6 md:p-8">
-          <div className="flex justify-between items-start mb-4">
-            <h1 className="text-3xl font-bold text-gray-800">{club.name}</h1>
-            <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded">
+
+        <div className="p-8 md:p-12">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-black">
+              {club.name}
+            </h1>
+            <span className="bg-gray-100 text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
               {club.category}
             </span>
           </div>
 
-          <p className="text-gray-600 mb-8 leading-relaxed">
+          <p className="text-gray-500 text-lg mb-12 font-light leading-relaxed">
             {club.description}
           </p>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gray-50 p-4 rounded-md border border-gray-200">
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Meeting Information
+            <div className="bg-gray-50 p-8 rounded-2xl border border-gray-100">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-black mb-4">
+                Meeting Info
               </h3>
-              <p className="text-gray-600 text-sm">{club.meeting}</p>
-              <p className="text-gray-600 text-sm">{club.room}</p>
+              <p className="text-gray-500 font-light mb-1">{club.meeting}</p>
+              <p className="text-gray-500 font-light">{club.room}</p>
             </div>
-            <div className="bg-gray-50 p-4 rounded-md border border-gray-200">
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Members & Interests
+            <div className="bg-gray-50 p-8 rounded-2xl border border-gray-100">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-black mb-4">
+                Members
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-500 font-light mb-1">
                 {club.members} Active Members
               </p>
-              <p className="text-gray-600 text-sm mt-1">{club.interest}</p>
+              <p className="text-gray-500 font-light">{club.interest}</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
