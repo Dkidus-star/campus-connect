@@ -1,19 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 
 export default function Navbar() {
-  // Helper function to apply active styles
   const navLinkClass = ({ isActive }) =>
     isActive
-      ? "text-blue-200 font-bold underline underline-offset-4"
-      : "hover:text-blue-200 transition";
+      ? "text-black font-semibold"
+      : "text-gray-400 hover:text-black transition-colors duration-300";
 
   return (
-    <nav className="bg-blue-700 text-white shadow-md">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold tracking-wide">
-          CampusConnect
+    <div className="flex justify-center pt-6 px-4 w-full z-50 absolute top-0">
+      <nav className="bg-white/80 backdrop-blur-md px-8 py-4 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 w-full max-w-5xl flex justify-between items-center">
+        <Link
+          to="/"
+          className="text-xl font-extrabold tracking-tighter text-black"
+        >
+          CAMPUS<span className="text-gray-300">CONNECT</span>
         </Link>
-        <ul className="flex space-x-6 font-medium">
+
+        <ul className="hidden md:flex space-x-8 text-xs uppercase tracking-widest font-bold">
           <li>
             <NavLink to="/" className={navLinkClass}>
               Home
@@ -34,13 +37,15 @@ export default function Navbar() {
               Resources
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/about" className={navLinkClass}>
-              About
-            </NavLink>
-          </li>
         </ul>
-      </div>
-    </nav>
+
+        <Link
+          to="/about"
+          className="bg-black text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors"
+        >
+          About Us
+        </Link>
+      </nav>
+    </div>
   );
 }
