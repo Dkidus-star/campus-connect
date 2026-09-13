@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FavoritesContext } from "../context/FavoritesContext";
 
-export default function ClubCard({ id, name, description, category }) {
+export default function ClubCard({ id, name, description, category, image }) {
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
   const isFavorite = favorites.includes(id);
 
@@ -22,14 +22,18 @@ export default function ClubCard({ id, name, description, category }) {
     >
       <button
         onClick={() => toggleFavorite(id)}
-        className="absolute top-6 right-6 z-10 p-3 bg-gray-50 group-hover:bg-white rounded-full shadow-sm hover:scale-110 transition-all text-xl"
+        className="absolute top-8 right-8 z-10 p-3 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:scale-110 transition-all text-xl"
         title="Toggle Favorite"
       >
         {isFavorite ? "⭐" : "☆"}
       </button>
 
-      <div className="h-48 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 font-medium mb-6">
-        {name} Image
+      <div className="h-48 rounded-2xl overflow-hidden mb-6 bg-gray-50">
+        <img
+          src={image}
+          alt={name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+        />
       </div>
 
       <div className="flex flex-col flex-grow">

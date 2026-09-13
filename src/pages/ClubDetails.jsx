@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import club1Img from "../assets/club1.jpg";
+import club2Img from "../assets/club2.jpg";
+import club3Img from "../assets/club3.jpg";
+import club4Img from "../assets/club4.jpg";
+
 const DUMMY_CLUBS = [
   {
     id: "1",
@@ -13,6 +18,7 @@ const DUMMY_CLUBS = [
     room: "Student Union, Room 204",
     members: 42,
     interest: "Great for students interested in leadership and networking.",
+    image: club1Img,
   },
   {
     id: "2",
@@ -23,6 +29,7 @@ const DUMMY_CLUBS = [
     room: "Campus Rec Center",
     members: 85,
     interest: "Equipment provided for beginners.",
+    image: club2Img,
   },
   {
     id: "3",
@@ -33,6 +40,7 @@ const DUMMY_CLUBS = [
     room: "Library Annex",
     members: 28,
     interest: "Participate in national tournaments.",
+    image: club3Img,
   },
   {
     id: "4",
@@ -43,6 +51,7 @@ const DUMMY_CLUBS = [
     room: "Arts Building, Room 102",
     members: 34,
     interest: "Bring your own camera or borrow one of ours.",
+    image: club4Img,
   },
 ];
 
@@ -78,8 +87,12 @@ export default function ClubDetails() {
       </Link>
 
       <div className="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl overflow-hidden border border-gray-100">
-        <div className="h-80 bg-gray-50 flex items-center justify-center text-gray-300 text-2xl font-black uppercase tracking-widest">
-          {club.name} Image
+        <div className="h-80 w-full bg-gray-50">
+          <img
+            src={club.image}
+            alt={club.name}
+            className="w-full h-full object-cover"
+          />
         </div>
 
         <div className="p-8 md:p-12">

@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ClubCard from "../components/ClubCard";
 
+import club1Img from "../assets/club1.jpg";
+import club2Img from "../assets/club2.jpg";
+import club3Img from "../assets/club3.jpg";
+import club4Img from "../assets/club4.jpg";
+
 export default function Clubs() {
   const [clubs, setClubs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -12,7 +17,7 @@ export default function Clubs() {
     const fetchClubs = async () => {
       try {
         setIsLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulated delay
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const mockData = [
           {
@@ -21,6 +26,7 @@ export default function Clubs() {
             category: "Academic",
             description:
               "A club for students passionate about software development and AI.",
+            image: club1Img,
           },
           {
             id: "2",
@@ -28,6 +34,7 @@ export default function Clubs() {
             category: "Recreation",
             description:
               "Join us for weekend hiking, camping, and climbing trips.",
+            image: club2Img,
           },
           {
             id: "3",
@@ -35,12 +42,14 @@ export default function Clubs() {
             category: "Academic",
             description:
               "Hone your public speaking and logical reasoning skills.",
+            image: club3Img,
           },
           {
             id: "4",
             name: "Photography Club",
             category: "Arts",
             description: "Capture campus life and learn professional editing.",
+            image: club4Img,
           },
         ];
 
@@ -65,14 +74,13 @@ export default function Clubs() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="pt-32 pb-20"
+      className="pt-32 pb-20 max-w-6xl mx-auto px-4"
     >
       <div className="flex flex-col items-center mb-16 text-center">
         <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-black mb-6 uppercase">
           Explore <span className="text-gray-200">Clubs</span>
         </h1>
 
-        {/* Styled Pill Search Bar */}
         <div className="relative w-full max-w-xl px-4">
           <input
             type="text"
@@ -112,6 +120,7 @@ export default function Clubs() {
                 name={club.name}
                 category={club.category}
                 description={club.description}
+                image={club.image}
               />
             ))
           ) : (
