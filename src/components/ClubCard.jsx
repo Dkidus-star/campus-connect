@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ClubCard({ id, name, description, category }) {
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition overflow-hidden flex flex-col">
@@ -12,12 +14,12 @@ export default function ClubCard({ id, name, description, category }) {
           </span>
         </div>
         <p className="text-gray-600 text-sm mb-4 flex-grow">{description}</p>
-        <a
-          href={`/clubs/${id}`}
+        <Link
+          to={`/clubs/${id}`}
           className="text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition"
         >
           View Details
-        </a>
+        </Link>
       </div>
     </div>
   );

@@ -1,35 +1,43 @@
+import { Link, NavLink } from "react-router-dom";
+
 export default function Navbar() {
+  // Helper function to apply active styles
+  const navLinkClass = ({ isActive }) =>
+    isActive
+      ? "text-blue-200 font-bold underline underline-offset-4"
+      : "hover:text-blue-200 transition";
+
   return (
     <nav className="bg-blue-700 text-white shadow-md">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="/" className="text-2xl font-bold tracking-wide">
+        <Link to="/" className="text-2xl font-bold tracking-wide">
           CampusConnect
-        </a>
+        </Link>
         <ul className="flex space-x-6 font-medium">
           <li>
-            <a href="/" className="hover:text-blue-200 transition">
+            <NavLink to="/" className={navLinkClass}>
               Home
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="/clubs" className="hover:text-blue-200 transition">
+            <NavLink to="/clubs" className={navLinkClass}>
               Clubs
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="/events" className="hover:text-blue-200 transition">
+            <NavLink to="/events" className={navLinkClass}>
               Events
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="/resources" className="hover:text-blue-200 transition">
+            <NavLink to="/resources" className={navLinkClass}>
               Resources
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="/about" className="hover:text-blue-200 transition">
+            <NavLink to="/about" className={navLinkClass}>
               About
-            </a>
+            </NavLink>
           </li>
         </ul>
       </div>
