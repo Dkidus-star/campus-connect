@@ -1,5 +1,7 @@
 # 🎓 CampusConnect
 
+**🌍 Live Demo:** [View the live application here]([https://campus-connect-sigma-ashen.vercel.app/])
+
 CampusConnect is a modern, responsive web application designed to centralize university life. It provides students with a beautifully curated digital lens to discover campus clubs, track upcoming events, and access vital academic resources.
 
 The project features a premium, high-contrast design system inspired by top-tier creative agencies, utilizing glassmorphism, massive typography, and fluid, physics-based animations.
