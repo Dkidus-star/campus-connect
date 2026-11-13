@@ -29,9 +29,3 @@ The project features a premium, high-contrast design system inspired by top-tier
 
 Ensure you have Node.js installed on your local machine.
 
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/Dkidus-star/campus-connect.git](https://github.com/Dkidus-star/campus-connect.git)
-   ```
